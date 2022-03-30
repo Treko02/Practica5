@@ -1,0 +1,38 @@
+#include <iostream>
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+using namespace std;
+
+int Bin(int n, int bi){
+    if ((n==0)||(n==1)){
+        return bi*10+n;
+    }else{
+        if (n%2==0){
+            bi=Bin(n/2, bi)*10;
+            return bi;
+        }else{
+            bi= Bin(n/2, bi)*10+1;
+            return bi;
+        }
+    }
+}
+void decBin(int & n){
+    if (n<0){
+        n=0;
+    }else{
+        n= Bin(n, 0);
+    }
+}
+TEST_CASE( "Comprobando decBin", "[decBin]" ) {
+
+    decBin(63)
+    REQUIRE(decBin(63)==111111);
+    decBin(45)
+    REQUIRE(decBin(45)==101101);
+    decBin(1)
+    REQUIRE(decBin(1)==1);
+    decBin(1555)
+    REQUIRE(decBin(1555)==11000010011);
+    decBin(0)
+    REQUIRE(decBin(0)==0);
+}
